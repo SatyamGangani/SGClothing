@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  ================================================== -->
+  <meta charset="utf-8">
+  <title>Aviato | E-commerce template</title>
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Construction Html5 Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="author" content="Themefisher">
+  <meta name="generator" content="Themefisher Constra HTML Template v1.0">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Themefisher Icon font -->
+  <link rel="stylesheet" href="../assets/plugins/themefisher-font/style.css">
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+  
+  <!-- Animate css -->
+  <link rel="stylesheet" href="../assets/plugins/animate/animate.css">
+  <!-- Slick Carousel -->
+  <link rel="stylesheet" href="../assets/plugins/slick/slick.css">
+  <link rel="stylesheet" href="../assets/plugins/slick/slick-theme.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body id="body">
+<!-- Start Top Header Bar -->
+{{>navbar}}
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content" >
+					<h1 class="page-name">Product</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="user-dashboard">
+<div class="se-pre-con" id="loaderCart" style="position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;z-index: 9999;background: url(../assets/images/Preloader_2.gif) center no-repeat #fff;display:none"></div>
+  <div class="container">
+    <div class="row" style="display: flex;justify-content: center;">
+      <div class="col-md-12">
+        <a href="/product/addProduct"><button type="button" id="addCategBtn" class="btn btn-default"><i class="tf-ion-plus"></i></button></a>
+          <div class="table-responsive">
+            <table class="table text-center ">
+              <thead>
+                <tr>
+                  <th class="text-center" >Name</th>
+                  <th class="text-center" >Category</th>
+                  <th class="text-center" >Price</th>
+                  <th class="text-center" >Material</th>
+                  <th class="text-center" >QTY[S]</th>
+                  <th class="text-center" >QTY[M]</th>
+                  <th class="text-center" >QTY[L]</th>
+                  <th class="text-center" >QTY[XL]</th>
+                  <th class="text-center" >Primary</th>
+                  <th class="text-center" >Secondary</th>
+                  <th class="text-center" >Action</th>
+                </tr>
+              </thead>
+              <tbody id="productBody">
+              </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Button trigger modal -->
+{{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productEditModal">
+</button> --}}
+
+<!-- Modal -->
+<div class="modal fade" id="productEditModal" tabindex="-1" role="dialog" aria-labelledby="productEdit" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+		<div class="modal-header">
+			<h5 class="modal-title" id="productEdit">Edit Product</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body" id="productEditBody">
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" id="updateModalBtn" >Save changes</button>
+			{{!-- <button type="button" class="btn btn-primary" id="updateModalBtn" onclick="addProductData(true)" >Save changes</button> --}}
+		</div>
+		</div>
+	</div>
+</div>
+{{>footer}}
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    
+    <!-- Main jQuery -->
+    <script src="../assets/plugins/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.1 -->
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Touchpin -->
+    <script src="../assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+    <!-- Instagram Feed Js -->
+    <script src="../assets/plugins/instafeed/instafeed.min.js"></script>
+    <!-- Video Lightbox Plugin -->
+    <script src="../assets/plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+    <!-- Count Down Js -->
+    <script src="../assets/plugins/syo-timer/build/jquery.syotimer.min.js"></script>
+
+    <!-- slick Carousel -->
+    <script src="../assets/plugins/slick/slick.min.js"></script>
+    <script src="../assets/plugins/slick/slick-animation.min.js"></script>
+
+    <!-- Google Mapl -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+    <script type="text/javascript" src="../assets/plugins/google-map/gmap.js"></script>
+
+    <!-- Main Js File -->
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/productScript.js"></script>
+    
+  </body>
+  </html>
