@@ -101,7 +101,9 @@ function getCartInfo(){
 
   if(userId){
     let checkoutLink = document.getElementById('checkoutLink');
-    checkoutLink.href = `/checkout?userId=${userId}`
+    if(checkoutLink){
+      checkoutLink.href = `/checkout?userId=${userId}`
+    }
     let header = new Headers();
     header.append('Content-Type','application/json');
     fetch(`/cart/userCart?id=${userId}`,{
