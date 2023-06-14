@@ -14,8 +14,8 @@ const bodyParser = require('body-parser');
 
 // app.use(bodyParser.urlencoded({ extended: true }))
 // for accessing formdata
-const multer = require('multer');
-const upload = multer({dest:'/upload'});
+// const multer = require('multer');
+// const upload = multer({dest:'/upload'});
 // app.use(upload.array());
 // Use this as we don't get body when we make post request.
 app.use(bodyParser.json())
