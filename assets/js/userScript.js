@@ -63,7 +63,7 @@ function submitForm(event){
         redirect: 'follow'
         };
 
-        fetch("http://localhost:7000/user/createUser", requestOptions)
+        fetch("/user/createUser", requestOptions)
         .then(response => response.json())
         .then(result => {
             // console.log(result)
