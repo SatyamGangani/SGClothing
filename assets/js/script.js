@@ -98,10 +98,10 @@
 
 function getCartInfo(){
   let userId = localStorage.getItem('user');
-  let checkoutLink = document.getElementById('checkoutLink');
-  checkoutLink.href = `/checkout?userId=${userId}`
 
   if(userId){
+    let checkoutLink = document.getElementById('checkoutLink');
+    checkoutLink.href = `/checkout?userId=${userId}`
 
     let header = new Headers();
     header.append('Content-Type','application/json');
