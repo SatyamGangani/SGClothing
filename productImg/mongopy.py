@@ -21,7 +21,7 @@ soup = BeautifulSoup(content)
     # mobile.append(d['src'])
 details = []
 data = soup.find_all('li',attrs={'class' : 'product-base'})
-category_id = list(db_sgecom['categories'].find({'name':"Women's Wear"}))[0]['_id']
+category_id = list(db_sgecom['categories'].find({'name':"Men's Wear"}))[0]['_id']
 for i in data:
     x = 'https://www.myntra.com/' + i.find('a',attrs={'data-refreshpage':'true'})['href']
     d = webdriver.Chrome()
