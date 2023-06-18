@@ -9,7 +9,7 @@ db_sgecom = conn['test']
 cl = db_sgecom['products']
 driver = webdriver.Chrome()
 driver.get('https://www.myntra.com/apparel?f=Brand%3AH%26M%2CNautica%2CUnited%20Colors%20of%20Benetton%3A%3ACategories%3AJeans%2CShirts%2CShorts%2CTrack%20Pants%2CTrousers%2CTshirts%3A%3AGender%3Amen%2Cmen%20women&rf=Price%3A399.0_5999.0_399.0%20TO%205999.0')
-driver.get('https://www.myntra.com/womens-western-wear?f=Brand%3AH%26M&rf=Discount%20Range%3A10.0_100.0_10.0%20TO%20100.0')
+# driver.get('https://www.myntra.com/womens-western-wear?f=Brand%3AH%26M&rf=Discount%20Range%3A10.0_100.0_10.0%20TO%20100.0')
 content = driver.page_source
 soup = BeautifulSoup(content)
 # data = soup.find_all('div',attrs={'class' : 'product-productMetaInfo'})
