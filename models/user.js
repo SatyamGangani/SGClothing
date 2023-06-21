@@ -20,6 +20,10 @@ const userSchema = mongoose.Schema({
     },
     role : {
         type : String
+    },
+    is_admin : {
+        type : Boolean,
+        default : false
     }
 })
 

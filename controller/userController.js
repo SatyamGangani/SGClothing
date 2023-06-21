@@ -349,5 +349,14 @@ const validateOtp = async  (req,res) => {
     return res.json({error:'Invalid request'});
 }
 
+const isAdmin = async (req,res)=>{
+  let data = req.query;
+  let user = await userModel.findOne({_id:data.id});
+  if(user.is_admin){
+    return res.json({'admin':true})
+  }
+  return res.json({'admin':false})
+}
 
-module.exports = {createNewUser,loginUser,getOtp,validateOtp}
+
+module.exports = {createNewUser,loginUser,getOtp,validateOtp,isAdmin}

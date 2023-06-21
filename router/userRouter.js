@@ -1,5 +1,5 @@
 const express = require('express');
-const {createNewUser,loginUser,getOtp,validateOtp} = require('../controller/userController')
+const {createNewUser,loginUser,getOtp,validateOtp,isAdmin} = require('../controller/userController')
 
 const router = express.Router();
 
@@ -12,6 +12,8 @@ router.get('/forgotpassword',(req,res)=>{
 router.get('/login',(req,res)=>{
     res.render('login')
 })
+
+router.get('/isAdmin',isAdmin)
 
 router.post('/createUser',createNewUser);
 

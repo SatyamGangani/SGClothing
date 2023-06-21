@@ -1,10 +1,8 @@
 const express = require('express');
-const {addNewCategory,allCategory,deleteCategory} = require('../controller/categoryController')
+const {addNewCategory,allCategory,deleteCategory,categoryView} = require('../controller/categoryController')
 const router = express.Router();
 
-router.get('/',(req,res)=>{
-    res.render('category')
-})
+router.get('/',categoryView)
 
 router.post('/addCategory',addNewCategory)
 

@@ -159,6 +159,21 @@ let user = localStorage.getItem('user');
 if(user){
   $('#userLogin').hide()
   $('#userSignUp').hide()
+  let categoryMenu = document.getElementById('categoryMenu');
+  
+  let adminHeader = new Headers();
+  adminHeader.append('Content-Type','application/json');
+  fetch(`/user/isAdmin?id=${user}`,{
+    headers:adminHeader,
+    method:'GET',
+  })
+  .then(res=>res.json())
+  .then(data=>{
+    if(data.admin){
+      $('#categoryMenu').show()
+      categoryMenu.href = `/category?user=${user}`
+    }
+  })
 }
 else{
   $('#userLogOut').hide();
@@ -168,3 +183,21 @@ function logOutUser(){
   localStorage.clear();
   window.location.href = '/'
 }
+
+let shopByCategory = document.getElementById('shopByCategory');
+shopByCategory.innerHTML = `
+<li class="dropdown-header">SHOP BY</li>
+<li role="separator" class="divider"></li>
+`
+
+let categoryHeader = new Headers();
+categoryHeader.append('Content-Type','application/json');
+fetch('/category/allCategory',{
+  method:'GET',
+  headers:categoryHeader
+})
+.then(res=>res.json())
+.then(data=>{
+  data.forEach(ele=>shopByCategory.innerHTML+=`<li><a href="/shop?category=${ele.name}">${ele.name}</a></li>`)
+})
+.catch(err=>console.log(err));

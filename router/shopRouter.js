@@ -10,7 +10,12 @@ const {singleProductPreview,shopProductCateg,addToCart} = require('../controller
 // })
 
 router.get('/',async (req,res)=>{
+    // console.log(req.query);
+    let categ = await categoryModel.findOne({name : req.query.category});
     let productData = await productModel.find();
+    if(categ){
+        productData = await productModel.find({category : categ._id});
+    }
     let categoryData = await categoryModel.find();
     return res.render('shopSideBar',{'products':productData,'category':categoryData});
 })

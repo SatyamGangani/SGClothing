@@ -1,5 +1,6 @@
 const express = require('express');
 const {categoryModel} = require('../models/category');
+const {userModel} = require('../models/user');
 
 const addNewCategory = async (req,res) =>{
     let data = req.body;
@@ -24,4 +25,19 @@ const allCategory = async (req,res) =>{
     return res.json(allCateg);
 }
 
-module.exports = {addNewCategory,allCategory,deleteCategory}
+const categoryView = async(req,res)=>{
+    let data = req.query;
+    try {
+        let user = await userModel.findOne({_id:data.user});
+        if(user){
+            if(user.is_admin){
+                return res.render('category');
+            }
+        }
+    } catch (error) {
+        return res.render('error404');
+    }
+    return res.render('error404');
+}
+
+module.exports = {addNewCategory,allCategory,deleteCategory,categoryView}
