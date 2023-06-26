@@ -159,8 +159,13 @@ let user = localStorage.getItem('user');
 if(user){
   $('#userLogin').hide()
   $('#userSignUp').hide()
+  $('#userDetail').show();
+  // alert(window.location.href)
   let categoryMenu = document.getElementById('categoryMenu');
-  
+  let userDetail = document.getElementById('userDetail');
+  if(userDetail){
+    userDetail.href = `/user/dashboard?id=${user}`
+  }
   let adminHeader = new Headers();
   adminHeader.append('Content-Type','application/json');
   fetch(`/user/isAdmin?id=${user}`,{
@@ -170,13 +175,16 @@ if(user){
   .then(res=>res.json())
   .then(data=>{
     if(data.admin){
-      $('#categoryMenu').show()
-      categoryMenu.href = `/category?user=${user}`
+      $('#categoryMenu').show();
+      if(categoryMenu){
+        categoryMenu.href = `/category?user=${user}`
+      }
     }
   })
 }
 else{
   $('#userLogOut').hide();
+  $('#userDetail').hide();
 }
 
 function logOutUser(){
@@ -185,10 +193,12 @@ function logOutUser(){
 }
 
 let shopByCategory = document.getElementById('shopByCategory');
-shopByCategory.innerHTML = `
-<li class="dropdown-header">SHOP BY</li>
-<li role="separator" class="divider"></li>
-`
+if(shopByCategory){
+  shopByCategory.innerHTML = `
+  <li class="dropdown-header">SHOP BY</li>
+  <li role="separator" class="divider"></li>
+  `
+}
 
 let categoryHeader = new Headers();
 categoryHeader.append('Content-Type','application/json');
@@ -198,6 +208,10 @@ fetch('/category/allCategory',{
 })
 .then(res=>res.json())
 .then(data=>{
-  data.forEach(ele=>shopByCategory.innerHTML+=`<li><a href="/shop?category=${ele.name}">${ele.name}</a></li>`)
+  data.forEach(ele=>{
+    if(shopByCategory){
+      shopByCategory.innerHTML+=`<li><a href="/shop?category=${ele.name}">${ele.name}</a></li>`
+    }
+  })
 })
 .catch(err=>console.log(err));

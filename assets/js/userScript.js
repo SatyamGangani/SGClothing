@@ -193,3 +193,99 @@ function setNewPassword(){
         }
     }
 }
+
+// if(! user){
+//     if(window.location.href.includes('/user/dashboard'))
+//     window.location.href = `/user/dashboard`;
+// }
+
+$( window ).on( "load", function() {
+    if(! user){
+        if(window.location.href.includes('/user/dashboard') || window.location.href.includes()){
+            fetch('/error')
+            .then(res=>res.text())
+            .then(data=>document.write(data))
+        }
+    }
+  } );
+
+async function updateUserDetail() {
+    // Input values.
+    let name = $('#name').val();
+    let phone = $('#phone').val();
+    let email = $('#email').val();
+    let userId = $('#userId').val();
+    let profilePic = document.getElementById('profilePic');
+    
+    let validRegexName = /^[a-zA-Z]/;
+    let validRegexEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    let validRegexPhone = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    let submitFlag = true;
+    if(name.match(validRegexName)){
+        $('#validName').css('display','none');
+    }
+    else{
+        $('#validName').css('display','block');
+        submitFlag=false;
+    }
+    if(email.match(validRegexEmail)){
+        $('#validEmail').css('display','none');
+    }
+    else{
+        $('#validEmail').css('display','block');
+        submitFlag=false;
+    }
+    if(phone.match(validRegexPhone)){
+        $('#validPhone').css('display','none');
+    }
+    else{
+        $('#validPhone').css('display','block');
+        submitFlag=false; 
+    }
+
+    let inValidImage = (img) => {
+        try {
+            return img.files[0].type.split("/")[0] == 'image' ? false : true
+        }
+        catch {
+            return true
+        }
+    }
+    if (inValidImage(profilePic) &&  profilePic.value!='') {
+        $('#invalidProfilePic').css('display', 'block');
+        submitFlag = false
+    }
+    // else if  (editProduct && && inValidImage(primaryImg)){
+    //     $('#invalidPrimaryImg').css('display', 'block');
+    //     submitFlag = false
+    // }
+    else {
+        $('#invalidProfilePic').css('display', 'none');
+    }
+    if (submitFlag) {
+        let formData = new FormData();
+        formData.append('name', name);
+        formData.append('id', userId);
+        formData.append('email', email);
+        formData.append('profilePic', profilePic.files[0]);
+        let options = {
+            method:'PUT',
+            body: formData
+        }
+        let url = `/user/updateUser`;
+        let fetchRes = fetch(url,options);
+        fetchRes.then(res =>
+            res.json()).then(data => {
+                if(data.success){
+                    window.location.href=`/user/dashboard?id=${userId}`
+                }
+                else{
+                    if(data.error){
+                        $('#errorMsg').show();
+                        let errorMsg = document.getElementById('errorMsg');
+                        errorMsg.innerHTML = `<i class="tf-ion-alert-circled"></i><span>${data.error}</span>`
+                    }
+                }
+            })
+    }
+}

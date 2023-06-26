@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<!--
+ // WEBSITE: https://themefisher.com
+ // TWITTER: https://twitter.com/themefisher
+ // FACEBOOK: https://www.facebook.com/themefisher
+ // GITHUB: https://github.com/themefisher/
+-->
+
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  ================================================== -->
+  <meta charset="utf-8">
+  <title>SG | Category</title>
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Construction Html5 Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="author" content="SG">
+  <meta name="generator" content="SG">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/images/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css" integrity="sha512-SgaqKKxJDQ/tAUAAXzvxZz33rmn7leYDYfBP+YoMRSENhf3zJyx3SBASt/OfeQwBHA1nxMis7mM3EV/oYT6Fdw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Themefisher Icon font -->
+  <link rel="stylesheet" href="../assets/plugins/themefisher-font/style.css">
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="../assets/plugins/bootstrap/css/bootstrap.min.css">
+  
+  <!-- Animate css -->
+  <link rel="stylesheet" href="../assets/plugins/animate/animate.css">
+  <!-- Slick Carousel -->
+  <link rel="stylesheet" href="../assets/plugins/slick/slick.css">
+  <link rel="stylesheet" href="../assets/plugins/slick/slick-theme.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+
+</head>
+
+<body id="body">
+<!-- Start Top Header Bar -->
+{{>navbar}}
+<section class="page-header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content" >
+					<h1 class="page-name">Profile</h1>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<div class="se-pre-con" id="loaderCart" style="position: fixed;left: 0px;top: 0px;width: 100%;height: 100%;z-index: 9999;background: url(../assets/images/Preloader_2.gif) center no-repeat #fff;display:none"></div>
+<section class="user-dashboard page-wrapper">
+  <div class="container">
+		<div class="row" style="display: flex;justify-content: center;font-size:large">
+			<div class="col-md-8">
+				<div class="dashboard-wrapper user-dashboard">
+          <div class="media">
+            <div class="pull-left text-center" href="#!">
+                {{#if user.profilePic}}
+                  <span><img class="media-object user-img" src="../userProfile/{{user.profilePic}}" style="width: 100px;" alt="Image"></span>
+                {{else}}
+                  <span><img class="media-object user-img" src="../userProfile/userAvatar.png" style="width: 100px;" alt="Image"></span>
+                {{/if}}
+                {{!-- <a href="#x" class="btn btn-transparent mt-20">Change Image</a> --}}
+            </div>
+            <div class="media-body">
+                <ul class="user-profile-list">
+                <li><span style="margin: 15px;">Full Name:</span>{{user.name}}</li>
+                {{!-- <li><span style="margin: 15px;">Country:</span>USA</li> --}}
+                <li><span style="margin: 15px;">Email:</span>{{user.email}}</li>
+                <li><span style="margin: 15px;">Phone:</span>{{user.phone}}</li>
+                {{!-- <li><span style="margin: 15px;">Date of Birth:</span></li> --}}
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Update</button>
+                </ul>
+            </div>
+          </div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+  <!-- Modal -->
+  <div class="modal fade" id="userEditModal" tabindex="-1" role="dialog" aria-labelledby="userEdit" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="userEdit">Edit User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="userEditBody">
+        <form class="text-left clearfix" >
+            <input type="text" class="form-control" id="userId" style="display: none;" value="{{user.id}}" placeholder="id">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" value="{{user.name}}" placeholder="Name">
+                <div class="alert alert-danger alert-common alert-solid" style="display: none;margin-top: 5px;" id="validName" role="alert"><i class="tf-ion-alert-circled"></i><span>Enter proper name.</span></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" value="{{user.email}}" placeholder="Email">
+                <div class="alert alert-danger alert-common alert-solid" style="display: none;margin-top: 5px;" id="validEmail" role="alert"><i class="tf-ion-alert-circled"></i><span>Enter proper email.</span></div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" class="form-control" id="phone" value="{{user.phone}}" placeholder="Phone Number">
+                <div class="alert alert-danger alert-common alert-solid" style="display: none;margin-top: 5px;" id="validPhone" role="alert"><i class="tf-ion-alert-circled"></i><span>Enter proper phone number.</span></div>
+            </div>
+            <div class="form-group">
+                <label for="profilePic">Profile Picture</label>
+                <input type="file" class="form-control" id="profilePic" name="profilePic" accept="image/*" placeholder="Image">
+                <div class="alert alert-danger alert-common alert-solid" style="display: none;margin-top: 5px;" id="invalidProfilePic" role="alert"><i class="tf-ion-alert-circled"></i><span>Select image file only.</span></div>
+                <div class="alert alert-danger alert-common alert-solid" style="display: none;margin-top: 5px;" id="errorMsg" role="alert"></div>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="updateModalBtn" onclick="updateUserDetail()" >Save changes</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+{{>footer}}
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    
+    <!-- Main jQuery -->
+    <script src="../assets/plugins/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.1 -->
+    <script src="../assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Touchpin -->
+    <script src="../assets/plugins/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js"></script>
+    <!-- Instagram Feed Js -->
+    <script src="../assets/plugins/instafeed/instafeed.min.js"></script>
+    <!-- Video Lightbox Plugin -->
+    <script src="../assets/plugins/ekko-lightbox/dist/ekko-lightbox.min.js"></script>
+    <!-- Count Down Js -->
+    <script src="../assets/plugins/syo-timer/build/jquery.syotimer.min.js"></script>
+
+    <!-- slick Carousel -->
+    <script src="../assets/plugins/slick/slick.min.js"></script>
+    <script src="../assets/plugins/slick/slick-animation.min.js"></script>
+
+    <!-- Google Mapl -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCC72vZw-6tGqFyRhhg5CkF2fqfILn2Tsw"></script>
+    <script type="text/javascript" src="../assets/plugins/google-map/gmap.js"></script>
+
+    <!-- Main Js File -->
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/userScript.js"></script>
+    
+  </body>
+  </html>

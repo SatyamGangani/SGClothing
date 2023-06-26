@@ -20,7 +20,9 @@ function categoryData(){
   let header = new Headers();
   let categoryBody = document.getElementById('categoryBody');
   $("#addCategBtn").prop("disabled",false);
-  categoryBody.innerHTML = "";
+  if(categoryBody){
+    categoryBody.innerHTML = "";
+  }
   $('#loaderCart').fadeIn('slow');
   header.append("Content-Type", "application/json");
   fetch("/category/allCategory",{

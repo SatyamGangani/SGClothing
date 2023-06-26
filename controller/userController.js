@@ -1,6 +1,8 @@
 const {userModel} = require("../models/user");
 const {otpModel} = require("../models/otp");
 const nodemailer = require('nodemailer');
+const path = require('path');
+const fs = require('fs');
 const createNewUser = async (req,res) => {
     let data = req.body;
     let email = await userModel.findOne({email:data.email});
@@ -358,5 +360,83 @@ const isAdmin = async (req,res)=>{
   return res.json({'admin':false})
 }
 
+const userProfile = async (req,res)=>{
+  let data = req.query;
+  try {
+    let user = await userModel.findOne({_id:data.id});
+    if(user){
+      console.log(`GET /user/dashboard ${user.name}`);
+      return res.render('userProfile',{user});
+    }
+    return res.render('error404');
+  } catch (error) {
+    return res.render('error404')
+  }
+}
 
-module.exports = {createNewUser,loginUser,getOtp,validateOtp,isAdmin}
+
+let ImgDirPath = path.join(__dirname,'../userProfile/');
+const updateUser = async (req,res)=>{
+  let data = req.body;
+  try {
+    let user = await userModel.findOne({_id:data.id});
+    if(user){
+      if(user.email != data.email){
+        let emailUser = await userModel.findOne({_id:data.id});
+        if(emailUser){
+          return res.json({'error':'Email already exist. Please try other email.'});
+        }
+        else{
+          let updateUser = await userModel.updateOne({_id:data.id},{
+            $set : {
+              name : data.name,
+              email : data.email,
+              phone : data.phone
+            }
+          })
+          console.log('updating');
+          return res.json({'success':true})
+        }
+      }
+      else{
+        let profilePic = req.files.profilePic;
+        if(profilePic != undefined){
+          try {
+            fs.unlinkSync(`${ImgDirPath}${user.profilePic}`);
+            console.log("DELETED IMG FOR user : " + user.name);
+          }
+          catch(e){
+              console.log('Error occurred while deleting img. Error: \n'+e);
+          }
+          let updateUser = await userModel.updateOne({_id:data.id},{
+            $set : {
+              name : data.name,
+              email : data.email,
+              phone : data.phone,
+              profilePic : profilePic[0].filename
+            }
+          })
+        }
+        else{
+
+          let updateUser = await userModel.updateOne({_id:data.id},{
+            $set : {
+              name : data.name,
+              email : data.email,
+              phone : data.phone
+            }
+          })
+        }
+        console.log(`PUT /updateUser ${user.name}`);
+        return res.json({'success':true})
+      }
+    }
+    else{
+      return res.json({'error':'Unexpectedly error occurred.'})
+    }
+  } catch (error) {
+    return res.json({'error':'Unexpectedly error occurred.'})
+  }
+}
+
+module.exports = {createNewUser,loginUser,getOtp,validateOtp,isAdmin,userProfile,updateUser};
