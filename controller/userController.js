@@ -409,7 +409,9 @@ const updateUser = async (req,res)=>{
       else{
         let profilePic = req.files.profilePic;
         if(profilePic != undefined){
-          let deleteImageURL = await cloudinary.uploader.destroy(user.profilePicPublicId);
+          if(user.profilePicPublicId){
+            let deleteImageURL = await cloudinary.uploader.destroy(user.profilePicPublicId);
+          }
           
           let image = `./temp/${profilePic[0].filename}`;
           let imgUrl = await cloudinary.uploader.upload(image);
