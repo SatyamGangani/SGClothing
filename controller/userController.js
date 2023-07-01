@@ -383,7 +383,7 @@ const userProfile = async (req,res)=>{
 
 
 let ImgDirPath = path.join(__dirname,'../userProfile/');
-let tempDirPath = path.join(__dirname,'../temp/');
+let tempDirPath = path.join(__dirname,'./temp/');
 const updateUser = async (req,res)=>{
   let data = req.body;
   try {
