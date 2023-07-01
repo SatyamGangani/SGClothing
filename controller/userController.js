@@ -384,9 +384,9 @@ const userProfile = async (req,res)=>{
 
 let ImgDirPath = path.join(__dirname,'../userProfile/');
 let tempDirPath = path.join(__dirname,'../temp/');
-console.log(ImgDirPath);
-console.log(tempDirPath);
 const updateUser = async (req,res)=>{
+  console.log(ImgDirPath);
+  console.log(tempDirPath);
   let data = req.body;
   try {
     let user = await userModel.findOne({_id:data.id});
