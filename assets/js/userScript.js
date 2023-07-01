@@ -263,6 +263,7 @@ async function updateUserDetail() {
         $('#invalidProfilePic').css('display', 'none');
     }
     if (submitFlag) {
+        $('#loaderCart').fadeIn('slow');
         let formData = new FormData();
         formData.append('name', name);
         formData.append('id', userId);

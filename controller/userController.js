@@ -3,6 +3,13 @@ const {otpModel} = require("../models/otp");
 const nodemailer = require('nodemailer');
 const path = require('path');
 const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
+cloudinary.config({
+    cloud_name : 'diorfadks',
+    api_key : '676245669722669',
+    api_secret : 'cyuBEEuA5L1CI6YfEpflZNjzc04'
+})
+
 const createNewUser = async (req,res) => {
     let data = req.body;
     let email = await userModel.findOne({email:data.email});
@@ -376,6 +383,7 @@ const userProfile = async (req,res)=>{
 
 
 let ImgDirPath = path.join(__dirname,'../userProfile/');
+let tempDirPath = path.join(__dirname,'../temp/');
 const updateUser = async (req,res)=>{
   let data = req.body;
   try {
@@ -401,9 +409,12 @@ const updateUser = async (req,res)=>{
       else{
         let profilePic = req.files.profilePic;
         if(profilePic != undefined){
+          let deleteImageURL = await cloudinary.uploader.destroy(user.profilePicPublicId);
+          
+          let image = `./temp/${profilePic[0].filename}`;
+          let imgUrl = await cloudinary.uploader.upload(image);
           try {
-            fs.unlinkSync(`${ImgDirPath}${user.profilePic}`);
-            console.log("DELETED IMG FOR user : " + user.name);
+            fs.unlinkSync(`${tempDirPath}${profilePic[0].filename}`);
           }
           catch(e){
               console.log('Error occurred while deleting img. Error: \n'+e);
@@ -413,7 +424,8 @@ const updateUser = async (req,res)=>{
               name : data.name,
               email : data.email,
               phone : data.phone,
-              profilePic : profilePic[0].filename
+              profilePic : imgUrl.url,
+              profilePicPublicId : imgUrl.public_id,
             }
           })
         }

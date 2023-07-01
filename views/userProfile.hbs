@@ -65,7 +65,7 @@
           <div class="media">
             <div class="pull-left text-center" href="#!">
                 {{#if user.profilePic}}
-                  <span><img class="media-object user-img" src="../userProfile/{{user.profilePic}}" style="width: 100px;" alt="Image"></span>
+                  <span><img class="media-object user-img" src="{{user.profilePic}}" style="width: 100px;" alt="Image"></span>
                 {{else}}
                   <span><img class="media-object user-img" src="../userProfile/userAvatar.png" style="width: 100px;" alt="Image"></span>
                 {{/if}}
@@ -78,7 +78,9 @@
                 <li><span style="margin: 15px;">Email:</span>{{user.email}}</li>
                 <li><span style="margin: 15px;">Phone:</span>{{user.phone}}</li>
                 {{!-- <li><span style="margin: 15px;">Date of Birth:</span></li> --}}
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Update</button>
+                <center>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#userEditModal">Update</button>
+                </center>
                 </ul>
             </div>
           </div>
