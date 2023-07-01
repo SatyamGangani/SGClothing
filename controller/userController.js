@@ -416,8 +416,9 @@ const updateUser = async (req,res)=>{
             let deleteImageURL = await cloudinary.uploader.destroy(user.profilePicPublicId);
           }
           
-          let image = `/temp/${profilePic[0].filename}`;
+          let image = `./temp/${profilePic[0].filename}`;
           let imgUrl = await cloudinary.uploader.upload(image);
+          console.log('Pic uploaded');
           try {
             fs.unlinkSync(`${tempDirPath}${profilePic[0].filename}`);
           }

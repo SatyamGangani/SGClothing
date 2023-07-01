@@ -57,7 +57,7 @@ app.use('*',(req,res)=>{
     res.render('error404')
 });
 
-app.listen(process.env.PORT || 7000,()=>{
+app.listen(process.env.PORT || 7500,()=>{
     console.log("Listening on 7000");
 })
 

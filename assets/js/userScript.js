@@ -66,6 +66,7 @@ function submitForm(event){
         fetch("/user/createUser", requestOptions)
         .then(response => response.json())
         .then(result => {
+
             // console.log(result)
             if(result.error){
                 $("#emailExistErr").css('display','block'); 
@@ -277,6 +278,7 @@ async function updateUserDetail() {
         let fetchRes = fetch(url,options);
         fetchRes.then(res =>
             res.json()).then(data => {
+                $('#loaderCart').fadeOut('slow');
                 if(data.success){
                     window.location.href=`/user/dashboard?id=${userId}`
                 }
