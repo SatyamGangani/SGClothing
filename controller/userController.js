@@ -385,8 +385,6 @@ const userProfile = async (req,res)=>{
 let ImgDirPath = path.join(__dirname,'../userProfile/');
 let tempDirPath = path.join(__dirname,'../temp/');
 const updateUser = async (req,res)=>{
-  console.log(ImgDirPath);
-  console.log(tempDirPath);
   let data = req.body;
   try {
     let user = await userModel.findOne({_id:data.id});
@@ -411,6 +409,8 @@ const updateUser = async (req,res)=>{
       else{
         let profilePic = req.files.profilePic;
         if(profilePic != undefined){
+          console.log(ImgDirPath);
+          console.log(tempDirPath);
           if(user.profilePicPublicId){
             let deleteImageURL = await cloudinary.uploader.destroy(user.profilePicPublicId);
           }
