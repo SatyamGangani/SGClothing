@@ -409,6 +409,7 @@ const updateUser = async (req,res)=>{
       else{
         let profilePic = req.files.profilePic;
         if(profilePic != undefined){
+          console.log('Updating Profile Pic.');
           console.log(ImgDirPath);
           console.log(tempDirPath);
           if(user.profilePicPublicId){
